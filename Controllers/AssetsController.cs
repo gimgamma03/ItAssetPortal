@@ -14,11 +14,30 @@ public class AssetsController : Controller
         _db = db;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? q, string sort = "latest")
     {
-        var assets = await _db.Assets
-            .OrderByDescending(a => a.Id)
+        var query = _db.Assets.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(q))
+        {
+            var keyword = q.Trim();
+            query = query.Where(a =>
+                a.Name.Contains(keyword) ||
+                (a.SerialNumber != null && a.SerialNumber.Contains(keyword)));
+        }
+
+        query = sort switch
+        {
+            "name" => query.OrderBy(a => a.Name).ThenByDescending(a => a.Id),
+            _ => query.OrderByDescending(a => a.Id)
+        };
+
+        var assets = await query
+            .AsNoTracking()
             .ToListAsync();
+
+        ViewBag.Query = q ?? string.Empty;
+        ViewBag.Sort = sort;
 
         return View(assets);
     }

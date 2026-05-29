@@ -22,6 +22,17 @@ Cursor를 활용해 개발/학습을 함께 진행하고 있습니다.
 - 인증/권한 처리
 - 운영 배포 구성
 
+## 로컬 실행
+
+Unity처럼 exe 하나만 실행하는 방식이 아니라, **.NET + SQL Server**가 필요합니다.
+
+- 준비: .NET 8 SDK, SQL Server (`SQLEXPRESS` 등)
+- 실행: `dotnet run` → 브라우저에서 `http://localhost:5072` (첫 실행 시 DB 자동 생성)
+
+## SSMS (선택)
+
+DB 안을 직접 볼 때만 씁니다. `dotnet run` 한 뒤 SSMS에서 `localhost\SQLEXPRESS` → `ItAssetPortalDb` → `Assets` 확인. 없어도 웹으로 등록·조회는 됩니다.
+
 ## 프로젝트 구조
 
 ```text

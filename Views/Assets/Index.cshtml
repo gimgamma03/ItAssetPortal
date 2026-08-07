@@ -42,6 +42,7 @@ else
                 <th>이름</th>
                 <th>시리얼</th>
                 <th>등록일</th>
+                <th style="width: 9rem;">관리</th>
             </tr>
         </thead>
         <tbody>
@@ -52,6 +53,10 @@ else
                     <td>@asset.Name</td>
                     <td>@(asset.SerialNumber ?? "-")</td>
                     <td>@asset.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-primary" asp-action="Edit" asp-route-id="@asset.Id">수정</a>
+                        <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@asset.Id">삭제</a>
+                    </td>
                 </tr>
             }
         </tbody>

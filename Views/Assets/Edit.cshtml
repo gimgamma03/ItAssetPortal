@@ -1,0 +1,32 @@
+@model ItAssetPortal.Models.Asset
+@{
+    ViewData["Title"] = "자산 수정";
+}
+
+<h1 class="h3 mb-3">자산 수정</h1>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">자산 이름</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SerialNumber" class="form-label">시리얼 번호 (선택)</label>
+        <input asp-for="SerialNumber" class="form-control" />
+        <span asp-validation-for="SerialNumber" class="text-danger"></span>
+    </div>
+
+    <p class="text-muted small mb-3">등록일: @Model.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm") (변경되지 않음)</p>
+
+    <button type="submit" class="btn btn-primary">저장</button>
+    <a class="btn btn-outline-secondary" asp-action="Index">목록</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

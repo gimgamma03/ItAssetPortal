@@ -1,0 +1,30 @@
+@model ItAssetPortal.Models.Asset
+@{
+    ViewData["Title"] = "자산 삭제";
+}
+
+<h1 class="h3 mb-3">자산 삭제</h1>
+
+<div class="alert alert-warning">
+    정말 이 자산을 삭제할까요? 삭제 후 되돌릴 수 없습니다.
+</div>
+
+<dl class="row mb-3">
+    <dt class="col-sm-3">번호</dt>
+    <dd class="col-sm-9">@Model.Id</dd>
+
+    <dt class="col-sm-3">이름</dt>
+    <dd class="col-sm-9">@Model.Name</dd>
+
+    <dt class="col-sm-3">시리얼</dt>
+    <dd class="col-sm-9">@(Model.SerialNumber ?? "-")</dd>
+
+    <dt class="col-sm-3">등록일</dt>
+    <dd class="col-sm-9">@Model.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">삭제</button>
+    <a class="btn btn-outline-secondary" asp-action="Index">취소</a>
+</form>
